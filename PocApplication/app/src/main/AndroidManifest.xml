@@ -10,30 +10,28 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyApplication"
+        android:theme="@style/Theme.PocApplication"
         tools:targetApi="31">
         <activity
-            android:name=".PayCodeActivity"
+            android:name=".ResultActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.example.myapplication.CHANGE_PAYCODE"/>
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".DataActivity"
-            android:exported="false"/>
-        <activity
-            android:name=".MenuActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="aesm1p.intent.action.LOGIN" />
-
+                <action android:name="android.intent.action.PICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".IntentRedirectActivity"
-            android:exported="true" />
+            android:name=".SchemeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="intent" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -42,7 +40,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter android:priority="999">
+                <action android:name="aesm1p.intent.action.LOGIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

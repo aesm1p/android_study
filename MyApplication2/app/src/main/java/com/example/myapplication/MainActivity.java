@@ -3,7 +3,6 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,24 +23,21 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         
-        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "hello", Toast.LENGTH_SHORT).show();
-                // 跳转到IntentRedirectActivity
-                Intent intent = new Intent(MainActivity.this, IntentRedirectActivity.class);
-//                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
-                startActivity(intent);
-            }
-        });
 
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "sensitive information has been sent.", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent("aesm1p.intent.action.InsecureBroadcast");
+                Intent i = new Intent("aesm1p.intent.action.LOGIN");
                 i.putExtra("username", "admin");
-                i.putExtra("password", "123456");
+                i.putExtra("token", "123456abcd");
+
+                // safa code
+//                ComponentName cn = new ComponentName(
+//                        "com.example.myapplication",
+//                        "com.example.myapplication.MenuActivity"
+//                );
+//                i.setComponent(cn);
+
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 // 打开activity
                 startActivity(i);
