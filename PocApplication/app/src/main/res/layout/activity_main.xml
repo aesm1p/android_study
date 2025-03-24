@@ -23,13 +23,12 @@
 
     <TextView
         android:id="@+id/logTextView"
-        android:layout_width="256dp"
-        android:layout_height="70dp"
+        android:layout_width="253dp"
+        android:layout_height="172dp"
         android:layout_marginStart="58dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="53dp"
-        android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,56 +39,22 @@
 
     <Button
         android:id="@+id/openUnexpBtn"
-        android:layout_width="259dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="30dp"
-        android:text="打开非导出组件"
+        android:layout_width="226dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
+        android:text="写入测试"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logTextView" />
 
     <Button
-        android:id="@+id/bypassPriBtn"
-        android:layout_width="259dp"
-        android:layout_height="62dp"
+        android:id="@+id/vul1Btn"
+        android:layout_width="226dp"
+        android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:text="越权修改Pay Code"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/CodeEditText" />
-
-    <EditText
-        android:id="@+id/CodeEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:hint="input pay code"
-        android:inputType="text"
+        android:text="任意文件写"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/openUnexpBtn" />
-
-    <WebView
-        android:id="@+id/inteneSchemeWebview"
-        android:layout_width="346dp"
-        android:layout_height="179dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.34"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="150dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="19dp"
-        android:gravity="bottom|center_horizontal"
-        android:text="Intent Scheme"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bypassPriBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

