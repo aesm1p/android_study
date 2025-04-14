@@ -12,16 +12,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+        <provider
+            android:name=".MyFileProvider"
+            android:authorities="com.example.myapplication.fileprovider"
+            android:enabled="true"
+            android:grantUriPermissions="true"
+            android:exported="true"></provider>
+
         <activity
             android:name=".PayCodeActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.example.myapplication.CHANGE_PAYCODE"/>
+                <action android:name="com.example.myapplication.CHANGE_PAYCODE" />
             </intent-filter>
         </activity>
         <activity
             android:name=".DataActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MenuActivity"
             android:exported="true">

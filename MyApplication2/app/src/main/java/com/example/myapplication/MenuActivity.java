@@ -31,48 +31,12 @@ public class MenuActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        TextView userInfoTv = findViewById(R.id.userInfoTv);
-        Button balanceBtn = findViewById(R.id.balanceBtn);
-        Button payCodeBtn = findViewById(R.id.payCodeBtn);
-        Button showCodeBtn = findViewById(R.id.showCodeBtn);
-        Button resultBtn = findViewById(R.id.resultBtn);
-
-        Intent i = getIntent();
-        String username = i.getStringExtra("username");
-        userInfoTv.append("Hello " + username + " \uD83D\uDE00");
-        EditText inputEt = findViewById(R.id.CodeEditTextTextPassword);
-
-        Intent targetIntent = getIntent().getParcelableExtra("targetIntent");
-        if (targetIntent != null) {
-            Log.d("myappunexp", "onCreate: targetIntent is not null");
-            startActivity(targetIntent);
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        if(action != null && action.equals("ACTION_SHARE_TO_ME")){
+            setResult(-1, getIntent());
+            finish();
         }
-
-        balanceBtn.setOnClickListener(v->{
-            Intent di = new Intent(MenuActivity.this, DataActivity.class);
-            di.putExtra("balance", 999999);
-            startActivity(di);
-        });
-
-        showCodeBtn.setOnClickListener(v->{
-            Intent pi = new Intent(MenuActivity.this, PayCodeActivity.class);
-            startActivity(pi);
-        });
-
-        payCodeBtn.setOnClickListener(v->{
-            Intent pi = new Intent(MenuActivity.this, PayCodeActivity.class);
-            pi.putExtra("payCode", inputEt.getText().toString().trim());
-            pi.putExtra("token", "123456abcd");
-            pi.setAction("com.example.myapplication.CHANGE_PAYCODE");
-            startActivity(pi);
-        });
-
-        resultBtn.setOnClickListener(v->{
-            Intent pi = new Intent("android.intent.action.PICK");
-            pi.putExtra("id", 222);
-            startActivityForResult(pi, 1);
-        });
-
 
     }
 

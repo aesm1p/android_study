@@ -7,28 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="197dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="354dp"
-        android:layout_marginEnd="40dp"
-        android:text="Login"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="97dp"
-        android:layout_height="69dp"
+        android:layout_width="253dp"
+        android:layout_height="68dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="354dp"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Intent劫持 "
+        android:text="受害者APP"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
