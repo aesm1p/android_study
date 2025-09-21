@@ -3,5 +3,7 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose) apply false
+
+    kotlin("plugin.serialization") version "1.9.24" // 与你的 Kotlin 版本匹配
 }
 
